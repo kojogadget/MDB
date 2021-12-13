@@ -1,0 +1,22 @@
+@use "../abstracts/variables" as *;
+@import url("https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+body {
+  font-family: "Marvel", sans-serif;
+  font-weight: $text-weight-normal;
+  font-size: $text-medium;
+  color: $color-white;
+}
+
+h1 {
+  font-size: $text-header-large;
+  font-weight: $text-weight-bold;
+}
+
+h2 {
+  font-size: $text-header-medium;
+}
+
+h3 {
+  font-size: $text-header-small;
+}
