@@ -1,0 +1,35 @@
+{
+  "name": "mdb",
+  "version": "1.0.0",
+  "description": "A database of the Marvel Cinematic Universe (MCU)",
+  "main": "app.js",
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack --mode=production"
+  },
+  "author": "Kjartan Gundersen",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.45.0",
+    "sass-loader": "^12.4.0",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
