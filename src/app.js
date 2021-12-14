@@ -1,16 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import "./sass/main.scss";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import MovieDetails from "./components/MovieDetails";
 
 const App = function () {
   return (
-    <>
+    <Router>
       <main>
-        <h1>Hello World</h1>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<MovieDetails />} />
+        </Routes>
       </main>
       <Footer />
-    </>
+    </Router>
   );
 };
 

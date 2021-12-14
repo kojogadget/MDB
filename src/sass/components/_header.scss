@@ -1,7 +1,10 @@
 @use "../abstracts/variables" as *;
 
-.footer {
-  height: 30rem;
+.header {
+  display: flex;
+  justify-content: center;
+
+  height: 20rem;
   background-color: #1f2d3d;
   color: $color-white;
 }
