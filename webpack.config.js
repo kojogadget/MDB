@@ -7,7 +7,7 @@ module.exports = {
   entry: "./src/app.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].js",
+    filename: "script.js",
     assetModuleFilename: "images/[name][ext]",
     clean: true,
   },
