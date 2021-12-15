@@ -11,14 +11,16 @@ import MovieDetails from "./pages/MovieDetails";
 const App = function () {
   return (
     <Router>
-      <main>
+      <div className="container">
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<MovieDetails />} />
-        </Routes>
-      </main>
-      <Footer />
+        <main className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<MovieDetails />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 };

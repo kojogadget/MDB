@@ -1,7 +1,22 @@
 @use "../abstracts/variables" as *;
 
 .footer {
+  grid-row: -1;
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: minmax(2rem, 1fr) repeat(8, minmax(min-content, 14rem)) minmax(
+      2rem,
+      1fr
+    );
+
   height: 30rem;
   background-color: #1f2d3d;
   color: $color-white;
+
+  &__content {
+    grid-row: 1;
+    grid-column: 2 / span 8;
+  }
 }

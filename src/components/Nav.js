@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import "../sass/components/_nav.scss";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+
 import { NavData } from "./Nav.data";
 
 export default function Nav() {
@@ -10,11 +13,11 @@ export default function Nav() {
   const showNavbar = () => setNavbar(!navbar);
 
   return (
-    <>
+    <div>
       <div className="nav-btn">
         <Link to="#" className="nav-btn__icon">
           {navbar ? (
-            <AiOutlineClose onClick={showNavbar} />
+            <AiOutlineClose onClick={showNavbar} onBlur={showNavbar} />
           ) : (
             <FaBars onClick={showNavbar} />
           )}
@@ -34,6 +37,6 @@ export default function Nav() {
           })}
         </ul>
       </nav>
-    </>
+    </div>
   );
 }

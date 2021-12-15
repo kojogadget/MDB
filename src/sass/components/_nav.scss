@@ -20,8 +20,8 @@
 
 .nav {
   position: absolute;
-  top: 20rem;
-  left: -100%;
+  top: 17rem;
+  left: 0;
 
   display: flex;
   justify-content: center;
@@ -30,10 +30,15 @@
   width: 25rem;
   background-color: $color-black;
 
-  transition: 850ms;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 350ms;
 
   &.active {
-    left: 0;
+    top: 20rem;
+    opacity: 1;
+    pointer-events: auto;
     transition: 350ms;
   }
 
