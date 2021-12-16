@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import "../sass/components/_nav.scss";
@@ -12,18 +12,30 @@ export default function Nav() {
 
   const showNavbar = () => setNavbar(!navbar);
 
+  const ref = useRef();
+
+  useEffect(() => {
+    const checkClickOutside = (e) => {
+      if (navbar && ref.current && !ref.current.contains(e.target)) {
+        setNavbar(false);
+      }
+    };
+    document.addEventListener("click", checkClickOutside);
+    return () => document.removeEventListener("click", checkClickOutside);
+  }, [navbar]);
+
   return (
-    <div>
+    <>
       <div className="nav-btn">
         <Link to="#" className="nav-btn__icon">
           {navbar ? (
-            <AiOutlineClose onClick={showNavbar} onBlur={showNavbar} />
+            <AiOutlineClose onClick={showNavbar} />
           ) : (
             <FaBars onClick={showNavbar} />
           )}
         </Link>
       </div>
-      <nav className={navbar ? "nav active" : "nav"}>
+      <nav className={navbar ? "nav active" : "nav"} ref={ref}>
         <ul className="nav__items" onClick={showNavbar}>
           {NavData.map((item, i) => {
             return (
@@ -37,6 +49,6 @@ export default function Nav() {
           })}
         </ul>
       </nav>
-    </div>
+    </>
   );
 }
