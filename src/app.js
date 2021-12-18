@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
+import Movies from "./pages/Movies";
 
 const App = function () {
   return (
@@ -16,7 +17,8 @@ const App = function () {
         <main className="content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<MovieDetails />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/movies/:id" element={<MovieDetails />} />
           </Routes>
         </main>
         <Footer />
