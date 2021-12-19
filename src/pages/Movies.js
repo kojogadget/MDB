@@ -18,7 +18,7 @@ export default function Movies() {
   }, []);
 
   return (
-    <>
+    <div className="page">
       <h1 className="page__header">Movies</h1>
       <ul className="movies">
         {movieList
@@ -40,6 +40,6 @@ export default function Movies() {
             })
           : null}
       </ul>
-    </>
+    </div>
   );
 }

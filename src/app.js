@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import Movies from "./pages/Movies";
+import Characters from "./pages/Characters";
 
 const App = function () {
   return (
@@ -19,6 +20,7 @@ const App = function () {
             <Route path="/" element={<Home />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/movies/:id" element={<MovieDetails />} />
+            <Route path="/characters" element={<Characters />} />
           </Routes>
         </main>
         <Footer />
