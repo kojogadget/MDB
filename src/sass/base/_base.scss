@@ -12,7 +12,7 @@ html {
 
 .container {
   display: grid;
-  grid-template-rows: 20rem minmax(calc(100vh - 50rem), max-content) 30rem;
+  grid-template-rows: 20rem minmax(calc(100vh - 20rem), max-content) 30rem;
   grid-template-columns: minmax(2rem, 1fr) repeat(8, minmax(min-content, 16rem)) minmax(
       2rem,
       1fr
@@ -32,7 +32,7 @@ html {
   width: 100%;
 
   &__header {
-    margin-top: 1.5rem;
+    padding: 2rem 0;
     text-align: center;
   }
 }
