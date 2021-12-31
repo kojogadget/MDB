@@ -1,6 +1,6 @@
 # A Marvel Cinematic Universe Database
 
-This is a site where you can find all MCU movies and information about each movie.
+This is a site where you can find all Marvel Cinematic Universe (MCU) movies and information about each movie.
 
 The site is incomplete because I want to make a more suitable API for this site. The site will in the end have a search function and information about both movies and characters.
 
