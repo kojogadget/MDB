@@ -1,4 +1,4 @@
-@use "../abstracts/variables" as *;
+@use '../abstracts/variables' as *;
 
 .movie {
   display: grid;
@@ -95,7 +95,7 @@
 
   &__related {
     grid-row: 4;
-    grid-column: 1 / -1;
+    grid-column: 2 / -2;
 
     position: relative;
     height: 35rem;
@@ -109,10 +109,6 @@
 
     &--list {
       list-style: none;
-
-      position: absolute;
-      top: 5rem;
-      left: 0;
 
       display: flex;
     }
@@ -161,4 +157,56 @@
       width: 100%;
     }
   }
+}
+
+.paginationBtn {
+  position: absolute;
+  top: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 8rem;
+  width: 8rem;
+  font-size: $text-header-small;
+  // border: $color-grey;
+  border: 2px solid $color-grey;
+  border-radius: 50%;
+  cursor: pointer;
+
+  background-color: $color-grey-light;
+
+  transition: all 0.2s;
+  z-index: 100;
+
+  &__back {
+    left: 0;
+    transform: translateX(-60%);
+
+    // &:hover {
+    //   transform: translateY(-3px) translateX(-60%);
+    // }
+
+    &:active {
+      transform: translateY(2px) translateX(-60%);
+    }
+  }
+
+  &__forward {
+    right: 0;
+    transform: translateX(60%);
+
+    // &:hover {
+    //   transform: translateY(-3px) translateX(60%);
+    // }
+
+    &:active {
+      transform: translateY(2px) translateX(60%);
+    }
+  }
+}
+
+.hidden {
+  display: none;
 }
