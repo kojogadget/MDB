@@ -4,16 +4,7 @@ import '../sass/pages/_movieDetails.scss';
 import '../sass/pages/_movies.scss';
 
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-
-// const nextPage = () => {
-//   if (paginationPage === lastPage) setPaginationPage(1);
-//   setPaginationPage(paginationPage + 1);
-// };
-
-// const previousPage = () => {
-//   if (paginationPage === 1) setPaginationPage(lastPage);
-//   setPaginationPage(paginationPage - 1);
-// };
+import { GoPrimitiveDot } from 'react-icons/go';
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -25,11 +16,12 @@ export default function MovieDetails() {
   let startPagination = (paginationPage - 1) * resultPerPage;
   let endPagination = paginationPage * resultPerPage;
 
+  let paginationDots = '';
+
   useEffect(() => {
     const updateWidth = () => {
       const width = window.innerWidth <= 1300 ? window.innerWidth : 1300;
 
-      console.log(Math.floor(width / 180));
       setResultPerPage(Math.floor(width / 180));
     };
     updateWidth();
@@ -53,11 +45,11 @@ export default function MovieDetails() {
 
     console.log(res);
     setMovie(res);
+    window.scrollTo(0, 0);
   }, [id]);
 
   useEffect(() => {
     if (!movie) return;
-    console.log(movie.related_movies.length, resultPerPage);
 
     const maxPages = Math.ceil(movie.related_movies.length / resultPerPage);
 
@@ -67,7 +59,18 @@ export default function MovieDetails() {
     endPagination = paginationPage * resultPerPage;
   }, [movie, resultPerPage]);
 
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    if (lastPage === 1) return (paginationDots = '');
+
+    let output = '';
+    for (let i = 1; i <= lastPage; i++) {
+      const markup = `<div className='paginationDot'><GoPrimitiveDot /></div>`;
+      output += markup;
+    }
+
+    paginationDots = output;
+    console.log(paginationDots);
+  }, [lastPage]);
 
   return (
     <div className='page'>
@@ -111,50 +114,6 @@ export default function MovieDetails() {
           </div>
 
           <div className='movie__related'>
-            <button
-              className={
-                lastPage !== 1
-                  ? 'paginationBtn paginationBtn__back'
-                  : 'paginationBtn paginationBtn__back hidden'
-              }
-              onClick={() => {
-                if (paginationPage === 1) {
-                  setPaginationPage(lastPage);
-                  startPagination = (paginationPage - 1) * resultPerPage;
-                  endPagination = paginationPage * resultPerPage;
-                  return;
-                }
-
-                setPaginationPage(paginationPage - 1);
-                startPagination = (paginationPage - 1) * resultPerPage;
-                endPagination = paginationPage * resultPerPage;
-                console.log(paginationPage);
-              }}
-            >
-              <IoIosArrowBack />
-            </button>
-            <button
-              className={
-                lastPage !== 1
-                  ? 'paginationBtn paginationBtn__forward'
-                  : 'paginationBtn paginationBtn__forward hidden'
-              }
-              onClick={() => {
-                if (paginationPage === lastPage) {
-                  setPaginationPage(1);
-                  startPagination = (paginationPage - 1) * resultPerPage;
-                  endPagination = paginationPage * resultPerPage;
-                  return;
-                }
-
-                setPaginationPage(paginationPage + 1);
-                startPagination = (paginationPage - 1) * resultPerPage;
-                endPagination = paginationPage * resultPerPage;
-                console.log(paginationPage);
-              }}
-            >
-              <IoIosArrowForward />
-            </button>
             <h3 className='movie__related--heading'>Related Movies</h3>
             <ul className='movie__related--list'>
               {movie.related_movies
@@ -179,6 +138,53 @@ export default function MovieDetails() {
                   );
                 })}
             </ul>
+            <div className='movie__related--pagination'>
+              <button
+                className={
+                  lastPage !== 1
+                    ? 'paginationBtn paginationBtn__back'
+                    : 'paginationBtn paginationBtn__back hidden'
+                }
+                onClick={() => {
+                  if (paginationPage === 1) {
+                    setPaginationPage(lastPage);
+                    startPagination = (paginationPage - 1) * resultPerPage;
+                    endPagination = paginationPage * resultPerPage;
+                    return;
+                  }
+
+                  setPaginationPage(paginationPage - 1);
+                  startPagination = (paginationPage - 1) * resultPerPage;
+                  endPagination = paginationPage * resultPerPage;
+                  console.log(paginationPage);
+                }}
+              >
+                <IoIosArrowBack />
+              </button>
+              {lastPage !== 1 ? `${paginationPage} / ${lastPage}` : ''}
+              <button
+                className={
+                  lastPage !== 1
+                    ? 'paginationBtn paginationBtn__forward'
+                    : 'paginationBtn paginationBtn__forward hidden'
+                }
+                onClick={() => {
+                  if (paginationPage === lastPage) {
+                    setPaginationPage(1);
+                    startPagination = (paginationPage - 1) * resultPerPage;
+                    endPagination = paginationPage * resultPerPage;
+                    return;
+                  }
+
+                  setPaginationPage(paginationPage + 1);
+                  startPagination = (paginationPage - 1) * resultPerPage;
+                  endPagination = paginationPage * resultPerPage;
+                  console.log(paginationPage);
+                }}
+              >
+                <IoIosArrowForward />
+              </button>
+            </div>
           </div>
         </div>
       ) : null}
