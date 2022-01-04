@@ -100,47 +100,51 @@ export default function MovieDetails() {
             <p className='article'>{movie.overview}</p>
           </div>
 
-          <div className='movie__related'>
-            <h3 className='movie__related--heading'>Related Movies</h3>
-            <ul className='movie__related--list'>
-              {movie.related_movies
-                .slice(startPagination, endPagination)
-                .map((m, i) => {
-                  return (
-                    <li key={i + m.imdb_id} className='movie__related--box'>
-                      <Link
-                        to={'/movies/' + m.id}
-                        className='movie__related--link'
-                      >
-                        <img
-                          src={m.cover_url}
-                          alt='Cover'
-                          className='movie__related--img'
-                        />
-                        <div className='movie__related--info'>
-                          <h3 className='movie__related--title'>{m.title}</h3>
-                        </div>
-                      </Link>
-                    </li>
-                  );
-                })}
-            </ul>
-            {maxPages !== 1 ? (
-              <ReactPaginate
-                previousLabel={'<'}
-                nextLabel={'>'}
-                pageCount={maxPages}
-                onPageChange={changePage}
-                forcePage={paginationPage}
-                containerClassName={'movie__related--pagination'}
-                previousLinkClassName={'paginationBtn paginationBtn__back'}
-                nextLinkClassName={'paginationBtn paginationBtn__forward'}
-                activeLinkClassName={'activePagination'}
-              />
-            ) : (
-              ''
-            )}
-          </div>
+          {movie.related_movies !== 0 ? (
+            <div className='movie__related'>
+              <h3 className='movie__related--heading'>Related Movies</h3>
+              <ul className='movie__related--list'>
+                {movie.related_movies
+                  .slice(startPagination, endPagination)
+                  .map((m, i) => {
+                    return (
+                      <li key={i + m.imdb_id} className='movie__related--box'>
+                        <Link
+                          to={'/movies/' + m.id}
+                          className='movie__related--link'
+                        >
+                          <img
+                            src={m.cover_url}
+                            alt='Cover'
+                            className='movie__related--img'
+                          />
+                          <div className='movie__related--info'>
+                            <h3 className='movie__related--title'>{m.title}</h3>
+                          </div>
+                        </Link>
+                      </li>
+                    );
+                  })}
+              </ul>
+              {maxPages > 1 ? (
+                <ReactPaginate
+                  previousLabel={'<'}
+                  nextLabel={'>'}
+                  pageCount={maxPages}
+                  onPageChange={changePage}
+                  forcePage={paginationPage}
+                  containerClassName={'movie__related--pagination'}
+                  previousLinkClassName={'paginationBtn paginationBtn__back'}
+                  nextLinkClassName={'paginationBtn paginationBtn__forward'}
+                  activeLinkClassName={'activePagination'}
+                />
+              ) : (
+                ''
+              )}
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       ) : null}
     </div>
