@@ -40,7 +40,6 @@ export default function MovieDetails() {
     );
     const res = await data.json();
 
-    console.log(res);
     setMovie(res);
     window.scrollTo(0, 0);
   }, [id]);
