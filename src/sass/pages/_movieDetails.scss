@@ -172,16 +172,36 @@
       margin-top: 2rem;
 
       justify-self: center;
+      list-style: none;
 
       display: flex;
+
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0.5rem;
+        cursor: pointer;
+      }
+
+      a {
+        padding: 0.3rem 0.5rem;
+        background-color: $color-grey-light;
+        border: 2px solid $color-grey;
+        border-radius: 10%;
+        box-shadow: 0 0.2rem 0.2rem rgba($color-black, 0.8);
+
+        transition: all 0.2s;
+
+        &:active {
+          transform: translateY(1px);
+        }
+      }
     }
   }
 }
 
 .paginationBtn {
-  // position: absolute;
-  // top: 50%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -190,7 +210,7 @@
   width: 3rem;
   font-size: $text-medium;
   border: 2px solid $color-grey;
-  border-radius: 50%;
+  border-radius: 50% !important;
   cursor: pointer;
 
   background-color: $color-grey-light;
@@ -198,32 +218,15 @@
   transition: all 0.2s;
   z-index: 100;
 
-  &__back {
-    margin-right: 1rem;
-    // left: 0;
-    // transform: translateX(-60%);
-
-    &:active {
-      transform: translateY(2px);
-    }
-  }
-
-  &__forward {
-    margin-left: 1rem;
-    // right: 0;
-    // transform: translateX(60%);
-
-    &:active {
-      transform: translateY(2px);
-    }
+  &:active {
+    transform: translateY(1px);
   }
 }
 
-.paginationDot {
-  color: $color-grey-dark;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.activePagination {
+  color: $color-white !important;
+  background-color: $color-black-light !important;
+  border: 2px solid $color-black-light !important;
 }
 
 .hidden {

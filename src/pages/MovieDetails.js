@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
+
 import '../sass/pages/_movieDetails.scss';
 import '../sass/pages/_movies.scss';
-
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { GoPrimitiveDot } from 'react-icons/go';
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState();
-  const [paginationPage, setPaginationPage] = useState(1);
+  const [paginationPage, setPaginationPage] = useState(0);
   const [resultPerPage, setResultPerPage] = useState(1);
-  const [lastPage, setLastPage] = useState(0);
+  const [maxPages, setMaxPages] = useState(0);
 
-  let startPagination = (paginationPage - 1) * resultPerPage;
-  let endPagination = paginationPage * resultPerPage;
-
-  let paginationDots = '';
+  let startPagination = paginationPage * resultPerPage;
+  let endPagination = startPagination + resultPerPage;
 
   useEffect(() => {
     const updateWidth = () => {
@@ -53,24 +50,15 @@ export default function MovieDetails() {
 
     const maxPages = Math.ceil(movie.related_movies.length / resultPerPage);
 
-    setLastPage(maxPages);
-    setPaginationPage(1);
-    startPagination = (paginationPage - 1) * resultPerPage;
-    endPagination = paginationPage * resultPerPage;
+    setMaxPages(maxPages);
+    setPaginationPage(0);
+    startPagination = paginationPage * resultPerPage;
+    endPagination = startPagination + resultPerPage;
   }, [movie, resultPerPage]);
 
-  useEffect(() => {
-    if (lastPage === 1) return (paginationDots = '');
-
-    let output = '';
-    for (let i = 1; i <= lastPage; i++) {
-      const markup = `<div className='paginationDot'><GoPrimitiveDot /></div>`;
-      output += markup;
-    }
-
-    paginationDots = output;
-    console.log(paginationDots);
-  }, [lastPage]);
+  const changePage = ({ selected }) => {
+    setPaginationPage(selected);
+  };
 
   return (
     <div className='page'>
@@ -138,53 +126,21 @@ export default function MovieDetails() {
                   );
                 })}
             </ul>
-            <div className='movie__related--pagination'>
-              <button
-                className={
-                  lastPage !== 1
-                    ? 'paginationBtn paginationBtn__back'
-                    : 'paginationBtn paginationBtn__back hidden'
-                }
-                onClick={() => {
-                  if (paginationPage === 1) {
-                    setPaginationPage(lastPage);
-                    startPagination = (paginationPage - 1) * resultPerPage;
-                    endPagination = paginationPage * resultPerPage;
-                    return;
-                  }
-
-                  setPaginationPage(paginationPage - 1);
-                  startPagination = (paginationPage - 1) * resultPerPage;
-                  endPagination = paginationPage * resultPerPage;
-                  console.log(paginationPage);
-                }}
-              >
-                <IoIosArrowBack />
-              </button>
-              {lastPage !== 1 ? `${paginationPage} / ${lastPage}` : ''}
-              <button
-                className={
-                  lastPage !== 1
-                    ? 'paginationBtn paginationBtn__forward'
-                    : 'paginationBtn paginationBtn__forward hidden'
-                }
-                onClick={() => {
-                  if (paginationPage === lastPage) {
-                    setPaginationPage(1);
-                    startPagination = (paginationPage - 1) * resultPerPage;
-                    endPagination = paginationPage * resultPerPage;
-                    return;
-                  }
-
-                  setPaginationPage(paginationPage + 1);
-                  startPagination = (paginationPage - 1) * resultPerPage;
-                  endPagination = paginationPage * resultPerPage;
-                  console.log(paginationPage);
-                }}
-              >
-                <IoIosArrowForward />
-              </button>
-            </div>
+            {maxPages !== 1 ? (
+              <ReactPaginate
+                previousLabel={'<'}
+                nextLabel={'>'}
+                pageCount={maxPages}
+                onPageChange={changePage}
+                forcePage={paginationPage}
+                containerClassName={'movie__related--pagination'}
+                previousLinkClassName={'paginationBtn paginationBtn__back'}
+                nextLinkClassName={'paginationBtn paginationBtn__forward'}
+                activeLinkClassName={'activePagination'}
+              />
+            ) : (
+              ''
+            )}
           </div>
         </div>
       ) : null}
