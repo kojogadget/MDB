@@ -1,4 +1,4 @@
-@use "../abstracts/variables" as *;
+@use '../abstracts/variables' as *;
 
 .movies {
   list-style: none;
@@ -48,5 +48,36 @@
 
   &__img {
     width: 100%;
+  }
+
+  &__pagination {
+    margin-top: 2.5rem;
+
+    margin: 2.5rem auto;
+
+    display: flex;
+    justify-content: center;
+
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 0.5rem;
+      cursor: pointer;
+    }
+
+    a {
+      padding: 0.3rem 0.5rem;
+      background-color: $color-grey-light;
+      border: 2px solid $color-grey;
+      border-radius: 10%;
+      box-shadow: 0 0.2rem 0.2rem rgba($color-black, 0.8);
+
+      transition: all 0.2s;
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
   }
 }
